@@ -12,7 +12,7 @@ namespace ADGP_125
 		int Defend(IStatsInterface Self);
 		int Magic(IStatsInterface Current, IStatsInterface Unit);
 		bool Flee(IStatsInterface Running);
-		bool GameOver(IStatsInterface Dead);
-		bool Victory(IStatsInterface UnitCount);
+		//bool GameOver(IStatsInterface Dead);
+		//bool Victory(IStatsInterface UnitCount);
 	}
 }
