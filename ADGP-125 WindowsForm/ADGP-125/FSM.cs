@@ -72,6 +72,20 @@ namespace ADGP_125
 			Console.WriteLine("The current state is: " + _currentState.ToString() + "\n");
 		}
 
+		public bool Check(Enum Temp)
+		{
+			if(Temp == _currentState )
+			{
+				Console.WriteLine("Testing");
+				return false;
+			}
+			else
+			{
+				Console.WriteLine("Nope");
+				return true;
+			}
+		}
+
 		/// <summary>
 		/// Adds transitions to the Dictionary.
 		/// </summary>

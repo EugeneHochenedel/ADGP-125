@@ -28,101 +28,13 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-			this.buttonAttack = new System.Windows.Forms.Button();
-			this.buttonDefend = new System.Windows.Forms.Button();
-			this.buttonMagic = new System.Windows.Forms.Button();
-			this.buttonFlee = new System.Windows.Forms.Button();
-			this.PlayerStats = new System.Windows.Forms.ListBox();
-			this.buttonSave = new System.Windows.Forms.Button();
 			this.SuspendLayout();
-			// 
-			// richTextBox1
-			// 
-			this.richTextBox1.Location = new System.Drawing.Point(12, 12);
-			this.richTextBox1.Name = "richTextBox1";
-			this.richTextBox1.Size = new System.Drawing.Size(593, 579);
-			this.richTextBox1.TabIndex = 0;
-			this.richTextBox1.Text = "";
-			this.richTextBox1.UseWaitCursor = true;
-			this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
-			// 
-			// buttonAttack
-			// 
-			this.buttonAttack.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonAttack.Location = new System.Drawing.Point(644, 234);
-			this.buttonAttack.Name = "buttonAttack";
-			this.buttonAttack.Size = new System.Drawing.Size(75, 34);
-			this.buttonAttack.TabIndex = 1;
-			this.buttonAttack.Text = "Attack";
-			this.buttonAttack.UseVisualStyleBackColor = true;
-			this.buttonAttack.Click += new System.EventHandler(this.TargetSelect);
-			// 
-			// buttonDefend
-			// 
-			this.buttonDefend.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonDefend.Location = new System.Drawing.Point(775, 234);
-			this.buttonDefend.Name = "buttonDefend";
-			this.buttonDefend.Size = new System.Drawing.Size(75, 34);
-			this.buttonDefend.TabIndex = 2;
-			this.buttonDefend.Text = "Defend";
-			this.buttonDefend.UseVisualStyleBackColor = true;
-			this.buttonDefend.Click += new System.EventHandler(this.Block);
-			// 
-			// buttonMagic
-			// 
-			this.buttonMagic.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonMagic.Location = new System.Drawing.Point(644, 288);
-			this.buttonMagic.Name = "buttonMagic";
-			this.buttonMagic.Size = new System.Drawing.Size(75, 29);
-			this.buttonMagic.TabIndex = 3;
-			this.buttonMagic.Text = "Magic";
-			this.buttonMagic.UseVisualStyleBackColor = true;
-			this.buttonMagic.Click += new System.EventHandler(this.TargetSelect2);
-			// 
-			// buttonFlee
-			// 
-			this.buttonFlee.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonFlee.Location = new System.Drawing.Point(775, 288);
-			this.buttonFlee.Name = "buttonFlee";
-			this.buttonFlee.Size = new System.Drawing.Size(75, 29);
-			this.buttonFlee.TabIndex = 4;
-			this.buttonFlee.Text = "Flee";
-			this.buttonFlee.UseVisualStyleBackColor = true;
-			this.buttonFlee.Click += new System.EventHandler(this.EscapeBattle);
-			// 
-			// PlayerStats
-			// 
-			this.PlayerStats.FormattingEnabled = true;
-			this.PlayerStats.HorizontalScrollbar = true;
-			this.PlayerStats.Location = new System.Drawing.Point(644, 12);
-			this.PlayerStats.Name = "PlayerStats";
-			this.PlayerStats.Size = new System.Drawing.Size(206, 147);
-			this.PlayerStats.TabIndex = 7;
-			// 
-			// buttonSave
-			// 
-			this.buttonSave.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonSave.Location = new System.Drawing.Point(775, 340);
-			this.buttonSave.Name = "buttonSave";
-			this.buttonSave.Size = new System.Drawing.Size(75, 29);
-			this.buttonSave.TabIndex = 10;
-			this.buttonSave.Text = "Save";
-			this.buttonSave.UseVisualStyleBackColor = true;
-			this.buttonSave.Click += new System.EventHandler(this.SaveStates);
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1019, 603);
-			this.Controls.Add(this.buttonSave);
-			this.Controls.Add(this.PlayerStats);
-			this.Controls.Add(this.buttonFlee);
-			this.Controls.Add(this.buttonMagic);
-			this.Controls.Add(this.buttonDefend);
-			this.Controls.Add(this.buttonAttack);
-			this.Controls.Add(this.richTextBox1);
+			this.ClientSize = new System.Drawing.Size(1020, 600);
 			this.Name = "Form1";
 			this.Text = "Form1";
 			this.ResumeLayout(false);
@@ -130,14 +42,6 @@
 		}
 
 		#endregion
-
-		private System.Windows.Forms.RichTextBox richTextBox1;
-		private System.Windows.Forms.Button buttonAttack;
-		private System.Windows.Forms.Button buttonDefend;
-		private System.Windows.Forms.Button buttonMagic;
-		private System.Windows.Forms.Button buttonFlee;
-		private System.Windows.Forms.ListBox PlayerStats;
-		private System.Windows.Forms.Button buttonSave;
 	}
 }
 

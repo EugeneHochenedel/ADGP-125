@@ -14,6 +14,7 @@ namespace ADGP_125
 		int iDefense { get; set; }
 		int iIntelligence { get; set; }
 		int iExperience { get; set; }
+		int iLevel { get; set; }
 		bool Alive { get; set; }
 	}
 }

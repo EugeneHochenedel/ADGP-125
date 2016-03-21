@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ADGP_125
 {
-	//class Player : IStatsInterface//, IActionsInterface
-	//{
+	class Player : Unit //IStatsInterface, IActionsInterface
+	{
 	//	private int iHP, iMP, iStr, iDef, iInt;
 	//	bool Life;
 
@@ -111,5 +111,5 @@ namespace ADGP_125
 		//	this.iDefense = iIncrease;
 		//	return this.iDefense;
 		//}
-	//}
+	}
 }

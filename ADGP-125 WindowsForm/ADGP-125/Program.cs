@@ -17,42 +17,16 @@ namespace ADGP_125
 {
 	static class Program
 	{
-		enum GameStates
-		{
-			INIT,
-			ACTIONSELECT,
-			ENEMYSELECT,
-			BATTLEPHASE,
-			ENDBATTLE,
-
-		}
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
 		[STAThread]
 		static void Main()
 		{
-			FSM FiniteStateMachine = new FSM(GameStates.INIT);
-			FiniteStateMachine.AddState(GameStates.INIT);
-			FiniteStateMachine.AddState(GameStates.ACTIONSELECT);
-			FiniteStateMachine.AddState(GameStates.ENEMYSELECT);
-			FiniteStateMachine.AddState(GameStates.BATTLEPHASE);
-			FiniteStateMachine.AddState(GameStates.ENDBATTLE);
-
-			FiniteStateMachine.AddTransition(GameStates.INIT, GameStates.ACTIONSELECT);
-			FiniteStateMachine.AddTransition(GameStates.ACTIONSELECT, GameStates.ENEMYSELECT);
-			FiniteStateMachine.AddTransition(GameStates.ENEMYSELECT, GameStates.BATTLEPHASE);
-			FiniteStateMachine.AddTransition(GameStates.BATTLEPHASE, GameStates.ENDBATTLE);
-			FiniteStateMachine.AddTransition(GameStates.BATTLEPHASE, GameStates.ACTIONSELECT);
-			FiniteStateMachine.AddTransition(GameStates.ENEMYSELECT, GameStates.ACTIONSELECT);
-			FiniteStateMachine.AddTransition(GameStates.ACTIONSELECT, GameStates.ENDBATTLE);
-			FiniteStateMachine.AddTransition(GameStates.ACTIONSELECT, GameStates.BATTLEPHASE);
-
-			//Player User = new Player(36, 50, 12, 16, 20, true);
-
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Form1());
+			Application.Run(new Form2());
+			
 		}
 	}
 }
