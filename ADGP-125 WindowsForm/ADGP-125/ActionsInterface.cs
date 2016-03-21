@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ADGP_125
 {
-	public interface ActionsInterface
+	public interface IActionsInterface<T>
 	{
-		int Attack(IStatsInterface Unit);
-		int Defend(IStatsInterface Self);
-		int Magic(IStatsInterface Current, IStatsInterface Unit);
-		bool Flee(IStatsInterface Running);
+		int iAttack(T Unit);
+		int iDefend(T Self);
+		//int iMagic(IStatsInterface Current, IStatsInterface Unit);
+		//bool Flee(IStatsInterface Running);
 		//bool GameOver(IStatsInterface Dead);
 		//bool Victory(IStatsInterface UnitCount);
 	}

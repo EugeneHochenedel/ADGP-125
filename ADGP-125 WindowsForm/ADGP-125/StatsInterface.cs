@@ -13,6 +13,7 @@ namespace ADGP_125
 		int iStrength { get; set; }
 		int iDefense { get; set; }
 		int iIntelligence { get; set; }
+		int iExperience { get; set; }
 		bool Alive { get; set; }
 	}
 }
