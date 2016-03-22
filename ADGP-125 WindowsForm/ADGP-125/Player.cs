@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ADGP_125
 {
 	//[Serializable()]
-	class Player : Unit //IStatsInterface, IActionsInterface
+	class Player //: Unit //IStatsInterface, IActionsInterface
 	{
 		//private int iHP, iMP, iStr, iDef, iInt;
 		//bool Life;

@@ -23,8 +23,6 @@ namespace ADGP_125
 			BATTLEPHASE,
 			ENDBATTLE,
 		}
-		
-
 
 		FSM StateMachine = new FSM(BattleStates.INIT);
 		//public Unit Temp = new Unit();
@@ -52,22 +50,15 @@ namespace ADGP_125
 			StateMachine.AddTransition(BattleStates.ENEMYSELECT, BattleStates.ACTIONSELECT);
 			StateMachine.AddTransition(BattleStates.ACTIONSELECT, BattleStates.ENDBATTLE);
 			StateMachine.AddTransition(BattleStates.ACTIONSELECT, BattleStates.BATTLEPHASE);
-
-			StateMachine.ChangeState(BattleStates.ACTIONSELECT);
 		}
 
 		Unit Temp;
 
 		private void richTextBox1_TextChanged(object sender, EventArgs e)
 		{
-			if (StateMachine._State.Equals(BattleStates.ACTIONSELECT))
+			if (e.GetType() == typeof(MouseEventArgs))
 			{
-				if (e.GetType() == typeof(MouseEventArgs))
-				{
-
-				}
 			}
-
 		}
 
 		private void AttackSelect(object sender, EventArgs e)
@@ -75,14 +66,25 @@ namespace ADGP_125
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
 				StateMachine.ChangeState(BattleStates.ENEMYSELECT);
+				if (StateMachine._State.Equals(BattleStates.ENEMYSELECT))
+				{
+					buttonDefend.Hide();
+					buttonMagic.Hide();
+					buttonFlee.Hide();
+					buttonAttack.Hide();
+					buttonBack.Show();
+					Enemy1.Show();
+					Enemy2.Show();
+					Enemy3.Show();
+					Enemy4.Show();
+				}
 			}
 		}
-
 		private void SaveStates(object sender, EventArgs e)
 		{
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
-				Temp = new Unit(Named.Text, (int)Health2.Value, (int)Mana.Value/*, (int)Strength.Value*/, (int)Armour.Value, (int)Wisdom.Value, (int)Experience.Value, (int)Levels.Value, true);
+				Temp = new Unit(Named.Text, (int)HealthPoints.Value, (int)MagicPoints.Value, (int)Power.Value, (int)Armour.Value, (int)Wisdom.Value, (int)Experience.Value, (int)Levels.Value, true);
 				_SaveLoad.Seralization("UserInfo", Temp);
 			}
 		}
@@ -90,41 +92,74 @@ namespace ADGP_125
 		{
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
-
 				Temp = _SaveLoad.Deserialization("UserInfo");
-				Named.Text = Temp.Identifier;
-				Health2.Value = Temp.iHealth;
-				Mana.Value = Temp.iMana;
-				//Strength.Value = Temp.iStrength;
+				Named.Text = Temp.CharacterName;
+				HealthPoints.Value = Temp.iHealth;
+				MagicPoints.Value = Temp.iMana;
+				Power.Value = Temp.iStrength;
 				Armour.Value = Temp.iDefense;
 				Wisdom.Value = Temp.iIntelligence;
 				Experience.Value = Temp.iExperience;
 				Levels.Value = Temp.iLevel;
-				Temp.Alive = true;
+				//Temp.Alive = true;
 			}
 		}
 		private void Block(object sender, EventArgs e)
 		{
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
-				StateMachine.ChangeState(BattleStates.BATTLEPHASE);
+				//StateMachine.ChangeState(BattleStates.BATTLEPHASE);
 			}
 		}
-
 		private void MagicSelect(object sender, EventArgs e)
 		{
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
 				StateMachine.ChangeState(BattleStates.ENEMYSELECT);
+				if (StateMachine._State.Equals(BattleStates.ENEMYSELECT))
+				{
+					Enemy1.Show();
+					Enemy2.Show();
+					Enemy3.Show();
+					Enemy4.Show();
+					buttonDefend.Hide();
+					buttonAttack.Hide();
+					buttonFlee.Hide();
+					buttonMagic.Hide();
+					buttonBack.Show();
+				}
 			}
 		}
-
 		private void EscapeBattle(object sender, EventArgs e)
 		{
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
 
 			}
+		}
+		private void Previous(object sender, EventArgs e)
+		{
+			if(e.GetType() == typeof(MouseEventArgs))
+			{
+				StateMachine.ChangeState(BattleStates.ACTIONSELECT);
+				if (StateMachine._State.Equals(BattleStates.ACTIONSELECT))
+				{
+					buttonBack.Hide();
+					buttonMagic.Show();
+					buttonDefend.Show();
+					buttonAttack.Show();
+					buttonFlee.Show();
+					Enemy1.Hide();
+					Enemy2.Hide();
+					Enemy3.Hide();
+					Enemy4.Hide();
+				}
+			}
+		}
+
+		private void Form2_Load(object sender, EventArgs e)
+		{
+			StateMachine.ChangeState(BattleStates.ACTIONSELECT);
 		}
 	}
 }

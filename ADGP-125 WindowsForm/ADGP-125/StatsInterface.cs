@@ -8,9 +8,10 @@ namespace ADGP_125
 {
 	public interface IStatsInterface
 	{
+		string CharacterName { get; set; }
 		int iHealth { get; set; }
 		int iMana { get; set; }
-		//int iStrength { get; set; }
+		int iStrength { get; set; }
 		int iDefense { get; set; }
 		int iIntelligence { get; set; }
 		int iExperience { get; set; }

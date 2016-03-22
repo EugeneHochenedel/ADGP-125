@@ -1,13 +1,14 @@
 <SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
 <SOAP-ENV:Body>
 <a1:Unit id="ref-1" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/ADGP_125/ADGP-125%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<Identifier id="ref-3">Top</Identifier>
-<iHP>23</iHP>
-<iMP>2</iMP>
-<iDef>5</iDef>
-<iInt>6</iInt>
-<iExp>9</iExp>
-<iLvl>2</iLvl>
+<Identifier id="ref-3">A</Identifier>
+<iHP>48</iHP>
+<iMP>18</iMP>
+<iStr>28</iStr>
+<iDef>22</iDef>
+<iInt>12</iInt>
+<iExp>77</iExp>
+<iLvl>3</iLvl>
 <Life>true</Life>
 </a1:Unit>
 </SOAP-ENV:Body>

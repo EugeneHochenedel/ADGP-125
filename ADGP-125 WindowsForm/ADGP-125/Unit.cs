@@ -9,8 +9,8 @@ namespace ADGP_125
 	[Serializable()]
 	public class Unit : IStatsInterface//, IActionsInterface<Unit>
 	{
-		public string Identifier;
-		private int iHP, iMP,/* iSTR,*/ iDef, iInt, iExp, iLvl;
+		private string Identifier;
+		private int iHP, iMP, iStr, iDef, iInt, iExp, iLvl;
 		bool Life;
 
 		public Unit()
@@ -18,12 +18,12 @@ namespace ADGP_125
 
 		}
 
-		public Unit(string Person, int iLife, int iMag, /*int iPower,*/ int iArm, int iKnow, int iPoints, int iTier, bool State)
+		public Unit(string Person, int iLife, int iMag, int iPower, int iArm, int iKnow, int iPoints, int iTier, bool State)
 		{
 			Identifier = Person;
 			iHP = iLife;
 			iMP = iMag;
-			//iPower = iSTR;
+			iStr = iPower;
 			iDef = iArm;
 			iInt = iKnow;
 			iExp = iPoints;
@@ -31,6 +31,17 @@ namespace ADGP_125
 			Life = State;
 		}
 
+		public string CharacterName
+		{
+			get
+			{
+				return Identifier;
+			}
+			set
+			{
+				Identifier = value;
+			}
+		}
 		public int iHealth
 		{
 			get
@@ -53,17 +64,17 @@ namespace ADGP_125
 				iMP = value;
 			}
 		}
-		//public int iStrength
-		//{
-		//	get
-		//	{
-		//		return iSTR;
-		//	}
-		//	set
-		//	{
-		//		iSTR = value;
-		//	}
-		//}
+		public int iStrength
+		{
+			get
+			{
+				return iStr;
+			}
+			set
+			{
+				iStr = value;
+			}
+		}
 		public int iDefense
 		{
 			get
@@ -116,14 +127,7 @@ namespace ADGP_125
 			}
 			set
 			{
-				if (iHP >= 0)
-				{
-					Life = true;
-				}
-				else if (iHP <= 0)
-				{
-					Life = false;
-				}
+				Life = value;
 			}
 		}
 
