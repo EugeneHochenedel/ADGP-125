@@ -12,6 +12,9 @@ namespace ADGP_125
 {
 	public partial class Form2 : Form
 	{
+
+		XML_Stuff<Unit> _SaveLoad = new XML_Stuff<Unit>();
+
 		public enum BattleStates
 		{
 			INIT,
@@ -19,17 +22,17 @@ namespace ADGP_125
 			ENEMYSELECT,
 			BATTLEPHASE,
 			ENDBATTLE,
-
 		}
-	
+		
+
 
 		FSM StateMachine = new FSM(BattleStates.INIT);
-		public Unit Temp = new Unit();
-		public List<Unit> CharacterThings = new List<Unit>();
-		public string PlayerName;
-		public string Enemy1;
-		public string Enemy2;
-		public string Enemy3;
+		//public Unit Temp = new Unit();
+		//public List<Unit> CharacterThings = new List<Unit>();
+		//public string PlayerName;
+		//public string Enemy1;
+		//public string Enemy2;
+		//public string Enemy3;
 
 		public Form2()
 		{
@@ -53,12 +56,18 @@ namespace ADGP_125
 			StateMachine.ChangeState(BattleStates.ACTIONSELECT);
 		}
 
+		Unit Temp;
+
 		private void richTextBox1_TextChanged(object sender, EventArgs e)
 		{
-			if (e.GetType() == typeof(MouseEventArgs))
+			if (StateMachine._State.Equals(BattleStates.ACTIONSELECT))
 			{
-				
+				if (e.GetType() == typeof(MouseEventArgs))
+				{
+
+				}
 			}
+
 		}
 
 		private void AttackSelect(object sender, EventArgs e)
@@ -66,10 +75,6 @@ namespace ADGP_125
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
 				StateMachine.ChangeState(BattleStates.ENEMYSELECT);
-				if (StateMachine.Check(BattleStates.ENEMYSELECT))
-				{
-					Console.WriteLine("More experimenting");
-				}
 			}
 		}
 
@@ -77,15 +82,32 @@ namespace ADGP_125
 		{
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
-
+				Temp = new Unit(Named.Text, (int)Health2.Value, (int)Mana.Value/*, (int)Strength.Value*/, (int)Armour.Value, (int)Wisdom.Value, (int)Experience.Value, (int)Levels.Value, true);
+				_SaveLoad.Seralization("UserInfo", Temp);
 			}
 		}
-
-		private void Block(object sender, EventArgs e)
+		private void buttonLoad_Click(object sender, EventArgs e)
 		{
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
 
+				Temp = _SaveLoad.Deserialization("UserInfo");
+				Named.Text = Temp.Identifier;
+				Health2.Value = Temp.iHealth;
+				Mana.Value = Temp.iMana;
+				//Strength.Value = Temp.iStrength;
+				Armour.Value = Temp.iDefense;
+				Wisdom.Value = Temp.iIntelligence;
+				Experience.Value = Temp.iExperience;
+				Levels.Value = Temp.iLevel;
+				Temp.Alive = true;
+			}
+		}
+		private void Block(object sender, EventArgs e)
+		{
+			if (e.GetType() == typeof(MouseEventArgs))
+			{
+				StateMachine.ChangeState(BattleStates.BATTLEPHASE);
 			}
 		}
 
@@ -93,7 +115,7 @@ namespace ADGP_125
 		{
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
-
+				StateMachine.ChangeState(BattleStates.ENEMYSELECT);
 			}
 		}
 

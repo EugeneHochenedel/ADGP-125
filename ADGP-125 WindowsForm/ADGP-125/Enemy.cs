@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ADGP_125
 {
+	//[Serializable()]
 	class Enemy : Unit
 	{
 	}

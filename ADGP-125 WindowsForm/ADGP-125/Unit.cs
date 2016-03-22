@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace ADGP_125
 {
-	public class Unit : IStatsInterface, IActionsInterface<Unit>
+	[Serializable()]
+	public class Unit : IStatsInterface//, IActionsInterface<Unit>
 	{
 		public string Identifier;
-		private int iHP, iMP, iStr, iDef, iInt, iExp, iLvl;
+		private int iHP, iMP,/* iSTR,*/ iDef, iInt, iExp, iLvl;
 		bool Life;
 
 		public Unit()
@@ -17,11 +18,12 @@ namespace ADGP_125
 
 		}
 
-		public Unit(int iLife, int iMag, int iPower, int iArm, int iKnow, int iPoints, int iTier, bool State)
+		public Unit(string Person, int iLife, int iMag, /*int iPower,*/ int iArm, int iKnow, int iPoints, int iTier, bool State)
 		{
+			Identifier = Person;
 			iHP = iLife;
 			iMP = iMag;
-			iPower = iStr;
+			//iPower = iSTR;
 			iDef = iArm;
 			iInt = iKnow;
 			iExp = iPoints;
@@ -51,17 +53,17 @@ namespace ADGP_125
 				iMP = value;
 			}
 		}
-		public int iStrength
-		{
-			get
-			{
-				return iStr;
-			}
-			set
-			{
-				iStr = value;
-			}
-		}
+		//public int iStrength
+		//{
+		//	get
+		//	{
+		//		return iSTR;
+		//	}
+		//	set
+		//	{
+		//		iSTR = value;
+		//	}
+		//}
 		public int iDefense
 		{
 			get
@@ -110,57 +112,57 @@ namespace ADGP_125
 		{
 			get
 			{
-				return Alive;
+				return Life;
 			}
 			set
 			{
-				if (iHP > 0)
+				if (iHP >= 0)
 				{
-					Life = value;
+					Life = true;
 				}
 				else if (iHP <= 0)
 				{
-					Life = value;
+					Life = false;
 				}
 			}
 		}
 
-		public bool Attack(Unit Selected)
-		{
-			if(Selected.Defend() == true)
-			{
-				int iDamage = this.iStr - Selected.iDef;
-				int iRemaining = Selected.iHP - iDamage;
-				if(iRemaining <= 0)
-				{
-					iRemaining = 0;
-					Selected.iHP = iRemaining;
-					return true;
-				}
-				else if(iRemaining > 0)
-				{
-					Selected.iHP = iRemaining;
-					return true;
-				}
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+		//public bool Attack(Unit Selected)
+		//{
+		//	if(Selected.Defend() == true)
+		//	{
+		//		int iDamage = this.iStr - Selected.iDef;
+		//		int iRemaining = Selected.iHP - iDamage;
+		//		if(iRemaining <= 0)
+		//		{
+		//			iRemaining = 0;
+		//			Selected.iHP = iRemaining;
+		//			return true;
+		//		}
+		//		else if(iRemaining > 0)
+		//		{
+		//			Selected.iHP = iRemaining;
+		//			return true;
+		//		}
+		//		return true;
+		//	}
+		//	else
+		//	{
+		//		return false;
+		//	}
 			
-		}
-		public bool Defend()
-		{
-			int iIncrease = this.iDef * 2;
-			this.iDef = iIncrease;
-			return true;
-		}
+		//}
+		//public bool Defend()
+		//{
+		//	int iIncrease = this.iDef * 2;
+		//	this.iDef = iIncrease;
+		//	return true;
+		//}
 
-		public bool Magic(Unit One, Unit Two)
-		{
+		//public bool Magic(Unit One, Unit Two)
+		//{
 
-			return true;
-		}
+		//	return true;
+		//}
 	}
 }

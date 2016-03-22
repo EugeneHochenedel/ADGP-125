@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ADGP_125
 {
+	[Serializable()]
 	//finite state machine
 	//Helps to determine how it'll be used ahead of time
 	//Might only need to be made once, then just reused
@@ -25,6 +26,14 @@ namespace ADGP_125
 		Enum _currentState;
 		Dictionary<Enum, List<Transition>> _TransitionTable;
 		private List<Enum> _States;
+
+		public Enum _State
+		{
+			get
+			{
+				return _currentState;
+			}
+		}
 
 		/// <summary>
 		/// Constructs the FSM 
@@ -70,20 +79,6 @@ namespace ADGP_125
 			}
 
 			Console.WriteLine("The current state is: " + _currentState.ToString() + "\n");
-		}
-
-		public bool Check(Enum Temp)
-		{
-			if(Temp == _currentState )
-			{
-				Console.WriteLine("Testing");
-				return false;
-			}
-			else
-			{
-				Console.WriteLine("Nope");
-				return true;
-			}
 		}
 
 		/// <summary>

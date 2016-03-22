@@ -10,7 +10,7 @@ namespace ADGP_125
 	{
 		bool Attack(T Unit);
 		bool Defend();
-		bool Magic(T Target, T Player);
+		//bool Magic(T Target, T Player);
 		//bool Flee(IStatsInterface Running);
 		//bool GameOver(IStatsInterface Dead);
 		//bool Victory(IStatsInterface UnitCount);
