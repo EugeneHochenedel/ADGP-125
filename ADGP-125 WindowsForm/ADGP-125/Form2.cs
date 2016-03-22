@@ -15,6 +15,8 @@ namespace ADGP_125
 
 		XML_Stuff<Unit> _SaveLoad = new XML_Stuff<Unit>();
 
+		public List<string> _Test1 = new List<string>();
+
 		public enum BattleStates
 		{
 			INIT,
@@ -35,7 +37,9 @@ namespace ADGP_125
 		public Form2()
 		{
 			InitializeComponent();
+
 			
+
 			StateMachine.AddState(BattleStates.INIT);
 			StateMachine.AddState(BattleStates.ACTIONSELECT);
 			StateMachine.AddState(BattleStates.ENEMYSELECT);
@@ -52,7 +56,7 @@ namespace ADGP_125
 			StateMachine.AddTransition(BattleStates.ACTIONSELECT, BattleStates.BATTLEPHASE);
 		}
 
-		Unit Temp;
+		public Unit Temp = new Unit("A Name", 50, 23, 15, 5, 11, 50, 1, true);
 
 		private void richTextBox1_TextChanged(object sender, EventArgs e)
 		{
@@ -84,7 +88,7 @@ namespace ADGP_125
 		{
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
-				Temp = new Unit(Named.Text, (int)HealthPoints.Value, (int)MagicPoints.Value, (int)Power.Value, (int)Armour.Value, (int)Wisdom.Value, (int)Experience.Value, (int)Levels.Value, true);
+				//Temp;
 				_SaveLoad.Seralization("UserInfo", Temp);
 			}
 		}
@@ -93,15 +97,15 @@ namespace ADGP_125
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
 				Temp = _SaveLoad.Deserialization("UserInfo");
-				Named.Text = Temp.CharacterName;
-				HealthPoints.Value = Temp.iHealth;
-				MagicPoints.Value = Temp.iMana;
-				Power.Value = Temp.iStrength;
-				Armour.Value = Temp.iDefense;
-				Wisdom.Value = Temp.iIntelligence;
-				Experience.Value = Temp.iExperience;
-				Levels.Value = Temp.iLevel;
-				//Temp.Alive = true;
+				_Test1.Add("Name: " + Temp.CharacterName);
+				_Test1.Add("HP: " + Temp.iHealth);
+				_Test1.Add("MP: " + Temp.iMana);
+				_Test1.Add("Strength: " + Temp.iStrength);
+				_Test1.Add("Defense: " + Temp.iDefense);
+				_Test1.Add("Intelligence: " + Temp.iIntelligence);
+				_Test1.Add("Experience: " + Temp.iExperience);
+				_Test1.Add("Level: " + Temp.iLevel);
+				PlayerStats.DataSource = _Test1;
 			}
 		}
 		private void Block(object sender, EventArgs e)
