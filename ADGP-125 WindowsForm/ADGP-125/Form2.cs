@@ -38,8 +38,6 @@ namespace ADGP_125
 		{
 			InitializeComponent();
 
-			
-
 			StateMachine.AddState(BattleStates.INIT);
 			StateMachine.AddState(BattleStates.ACTIONSELECT);
 			StateMachine.AddState(BattleStates.ENEMYSELECT);
@@ -54,11 +52,16 @@ namespace ADGP_125
 			StateMachine.AddTransition(BattleStates.ENEMYSELECT, BattleStates.ACTIONSELECT);
 			StateMachine.AddTransition(BattleStates.ACTIONSELECT, BattleStates.ENDBATTLE);
 			StateMachine.AddTransition(BattleStates.ACTIONSELECT, BattleStates.BATTLEPHASE);
+
+			buttonAttack.Click += (_Button, _Click) => { StateText_TextChanged(buttonAttack, (MouseEventArgs)_Click); };
+			buttonMagic.Click += (_Button, _Click) => { StateText_TextChanged(buttonMagic, (MouseEventArgs)_Click); };
+			buttonDefend.Click += (_Button, _Click) => { StateText_TextChanged(buttonDefend, (MouseEventArgs)_Click); };
+			buttonFlee.Click += (_Button, _Click) => { StateText_TextChanged(buttonFlee, (MouseEventArgs)_Click); };
 		}
 
 		public Unit Temp = new Unit("A Name", 50, 23, 15, 5, 11, 50, 1, true);
 
-		private void richTextBox1_TextChanged(object sender, EventArgs e)
+		private void BattleInfo_TextChanged(object sender, EventArgs e)
 		{
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
@@ -72,15 +75,8 @@ namespace ADGP_125
 				StateMachine.ChangeState(BattleStates.ENEMYSELECT);
 				if (StateMachine._State.Equals(BattleStates.ENEMYSELECT))
 				{
-					buttonDefend.Hide();
-					buttonMagic.Hide();
-					buttonFlee.Hide();
-					buttonAttack.Hide();
-					buttonBack.Show();
-					Enemy1.Show();
-					Enemy2.Show();
-					Enemy3.Show();
-					Enemy4.Show();
+					UserActionSelect.Hide();
+					TargetSelect.Show();
 				}
 			}
 		}
@@ -88,7 +84,6 @@ namespace ADGP_125
 		{
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
-				//Temp;
 				_SaveLoad.Seralization("UserInfo", Temp);
 			}
 		}
@@ -112,6 +107,7 @@ namespace ADGP_125
 		{
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
+				Temp.Defend();
 				//StateMachine.ChangeState(BattleStates.BATTLEPHASE);
 			}
 		}
@@ -122,15 +118,8 @@ namespace ADGP_125
 				StateMachine.ChangeState(BattleStates.ENEMYSELECT);
 				if (StateMachine._State.Equals(BattleStates.ENEMYSELECT))
 				{
-					Enemy1.Show();
-					Enemy2.Show();
-					Enemy3.Show();
-					Enemy4.Show();
-					buttonDefend.Hide();
-					buttonAttack.Hide();
-					buttonFlee.Hide();
-					buttonMagic.Hide();
-					buttonBack.Show();
+					UserActionSelect.Hide();
+					TargetSelect.Show();
 				}
 			}
 		}
@@ -138,6 +127,7 @@ namespace ADGP_125
 		{
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
+				StateMachine.ChangeState(BattleStates.ENDBATTLE);
 
 			}
 		}
@@ -148,15 +138,8 @@ namespace ADGP_125
 				StateMachine.ChangeState(BattleStates.ACTIONSELECT);
 				if (StateMachine._State.Equals(BattleStates.ACTIONSELECT))
 				{
-					buttonBack.Hide();
-					buttonMagic.Show();
-					buttonDefend.Show();
-					buttonAttack.Show();
-					buttonFlee.Show();
-					Enemy1.Hide();
-					Enemy2.Hide();
-					Enemy3.Hide();
-					Enemy4.Hide();
+					UserActionSelect.Show();
+					TargetSelect.Hide();
 				}
 			}
 		}
@@ -164,6 +147,25 @@ namespace ADGP_125
 		private void Form2_Load(object sender, EventArgs e)
 		{
 			StateMachine.ChangeState(BattleStates.ACTIONSELECT);
+			TargetSelect.Hide();
+		}
+
+		private void StateText_TextChanged(object sender, EventArgs e)
+		{
+			if (e.GetType() == typeof(MouseEventArgs))
+			{
+				List<Button> Names = new List<Button>();
+				Button Test1 = (Button)sender;
+				
+				Names.Add(Test1);
+
+
+				foreach (Button b in Names)
+				{
+					StateText.Clear();
+					StateText.Text += StateMachine._State;
+				}
+			}
 		}
 	}
 }

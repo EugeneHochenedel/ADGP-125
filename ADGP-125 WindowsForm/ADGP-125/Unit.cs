@@ -131,37 +131,39 @@ namespace ADGP_125
 			}
 		}
 
-		//public bool Attack(Unit Selected)
-		//{
-		//	if(Selected.Defend() == true)
-		//	{
-		//		int iDamage = this.iStr - Selected.iDef;
-		//		int iRemaining = Selected.iHP - iDamage;
-		//		if(iRemaining <= 0)
-		//		{
-		//			iRemaining = 0;
-		//			Selected.iHP = iRemaining;
-		//			return true;
-		//		}
-		//		else if(iRemaining > 0)
-		//		{
-		//			Selected.iHP = iRemaining;
-		//			return true;
-		//		}
-		//		return true;
-		//	}
-		//	else
-		//	{
-		//		return false;
-		//	}
-			
-		//}
-		//public bool Defend()
-		//{
-		//	int iIncrease = this.iDef * 2;
-		//	this.iDef = iIncrease;
-		//	return true;
-		//}
+		public bool Attack(Unit Selected)
+		{
+			if (Selected.Defend() == true)
+			{
+				int iDamage = this.iStr - Selected.iDef;
+				int iRemaining = Selected.iHP - iDamage;
+				if (iRemaining <= 0)
+				{
+					iRemaining = 0;
+					Selected.iHP = iRemaining;
+					return true;
+				}
+				else if (iRemaining > 0)
+				{
+					Selected.iHP = iRemaining;
+					return true;
+				}
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+
+		}
+
+		public bool Defend()
+		{
+			int iIncrease = this.iDef * 2;
+			this.iDef = iIncrease;
+			Console.WriteLine("Def: " + this.iDef);
+			return true;
+		}
 
 		//public bool Magic(Unit One, Unit Two)
 		//{

@@ -1,15 +1,12 @@
-<SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-<SOAP-ENV:Body>
-<a1:Unit id="ref-1" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/ADGP_125/ADGP-125%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Dnull">
-<Identifier id="ref-3">A Name</Identifier>
-<iHP>50</iHP>
-<iMP>23</iMP>
-<iStr>15</iStr>
-<iDef>5</iDef>
-<iInt>11</iInt>
-<iExp>50</iExp>
-<iLvl>1</iLvl>
-<Life>true</Life>
-</a1:Unit>
-</SOAP-ENV:Body>
-</SOAP-ENV:Envelope>
+<?xml version="1.0"?>
+<Unit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CharacterName>A Name</CharacterName>
+  <iHealth>50</iHealth>
+  <iMana>23</iMana>
+  <iStrength>15</iStrength>
+  <iDefense>5</iDefense>
+  <iIntelligence>11</iIntelligence>
+  <iExperience>50</iExperience>
+  <iLevel>1</iLevel>
+  <Alive>true</Alive>
+</Unit>

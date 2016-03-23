@@ -12,6 +12,7 @@ namespace ADGP_125
 	//Might only need to be made once, then just reused
 	class FSM
 	{
+		[Serializable()]
 		public class Transition
 		{
 			public Enum Present;
@@ -24,6 +25,7 @@ namespace ADGP_125
 		}
 
 		Enum _currentState;
+		
 		Dictionary<Enum, List<Transition>> _TransitionTable;
 		private List<Enum> _States;
 

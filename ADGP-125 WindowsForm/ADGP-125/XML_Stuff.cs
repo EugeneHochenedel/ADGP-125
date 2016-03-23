@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization.Formatters.Soap;
+using System.Xml.Serialization;
 using System.IO;
 using System.Collections;
 using System.Windows.Forms;
@@ -21,7 +20,7 @@ namespace ADGP_125
 		{
 			using (FileStream fStream = File.Create(@"..\..\Saves\" + Files + ".xml"))
 			{
-				SoapFormatter _serialize = new SoapFormatter();
+				XmlSerializer _serialize = new XmlSerializer(typeof(T));
 				_serialize.Serialize(fStream, Info);
 				fStream.Close();
 			}
@@ -29,11 +28,12 @@ namespace ADGP_125
 
 		public T Deserialization(string Files)
 		{
+			
 			T tCharacter;
 			using (FileStream fStream = File.OpenRead(@"..\..\Saves\" + Files + ".xml"))
 			{
-				SoapFormatter _deseraialization = new SoapFormatter();
-				tCharacter = (T)_deseraialization.Deserialize(fStream);
+				XmlSerializer _deserialization = new XmlSerializer(typeof(T));
+				tCharacter = (T)_deserialization.Deserialize(fStream);
 				fStream.Close();
 			}
 			return tCharacter;
