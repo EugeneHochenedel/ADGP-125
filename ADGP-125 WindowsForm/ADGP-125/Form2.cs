@@ -24,6 +24,7 @@ namespace ADGP_125
 			ENEMYSELECT,
 			BATTLEPHASE,
 			ENDBATTLE,
+			FILLER,
 		}
 
 		FSM StateMachine = new FSM(BattleStates.INIT);
@@ -43,7 +44,7 @@ namespace ADGP_125
 			StateMachine.AddState(BattleStates.ENEMYSELECT);
 			StateMachine.AddState(BattleStates.BATTLEPHASE);
 			StateMachine.AddState(BattleStates.ENDBATTLE);
-
+			
 			StateMachine.AddTransition(BattleStates.INIT, BattleStates.ACTIONSELECT);
 			StateMachine.AddTransition(BattleStates.ACTIONSELECT, BattleStates.ENEMYSELECT);
 			StateMachine.AddTransition(BattleStates.ENEMYSELECT, BattleStates.BATTLEPHASE);
@@ -57,6 +58,10 @@ namespace ADGP_125
 			buttonMagic.Click += (_Button, _Click) => { StateText_TextChanged(buttonMagic, (MouseEventArgs)_Click); };
 			buttonDefend.Click += (_Button, _Click) => { StateText_TextChanged(buttonDefend, (MouseEventArgs)_Click); };
 			buttonFlee.Click += (_Button, _Click) => { StateText_TextChanged(buttonFlee, (MouseEventArgs)_Click); };
+			buttonBack.Click += (_Button, _Click) => { StateText_TextChanged(buttonBack, (MouseEventArgs)_Click); };
+
+			buttonAttack.Click += (_Select, _Click) => { BattleInfo_TextChanged(buttonAttack, (MouseEventArgs)_Click); };
+			Enemy1.Click += (_Select, _Click) => { BattleInfo_TextChanged(Enemy1, (MouseEventArgs)_Click); };
 		}
 
 		public Unit Temp = new Unit("A Name", 50, 23, 15, 5, 11, 50, 1, true);
@@ -65,9 +70,27 @@ namespace ADGP_125
 		{
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
+				List<Button> Names1 = new List<Button>();
+				Button Test2 = (Button)sender;
+				Names1.Add(Test2);
+				
+				foreach(Button c in Names1)
+				{
+					if(UserActionSelect.HasChildren.GetType() == typeof(Button))
+
+					//if (UserActionSelect.Visible == true && TargetSelect.Visible == false)
+					{
+						BattleInfo.Text = "Select an enemy to " + c.Text;
+					}
+					//else if(UserActionSelect.Visible == false && TargetSelect.Visible == true)
+					//{
+					//	BattleInfo.Text = "You attack enemy: " + c.Text;
+					//}
+					
+				}
+				
 			}
 		}
-
 		private void AttackSelect(object sender, EventArgs e)
 		{
 			if (e.GetType() == typeof(MouseEventArgs))
@@ -128,7 +151,7 @@ namespace ADGP_125
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
 				StateMachine.ChangeState(BattleStates.ENDBATTLE);
-
+				
 			}
 		}
 		private void Previous(object sender, EventArgs e)
@@ -156,9 +179,7 @@ namespace ADGP_125
 			{
 				List<Button> Names = new List<Button>();
 				Button Test1 = (Button)sender;
-				
 				Names.Add(Test1);
-
 
 				foreach (Button b in Names)
 				{

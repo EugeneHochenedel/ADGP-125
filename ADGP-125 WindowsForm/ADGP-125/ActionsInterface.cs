@@ -8,11 +8,11 @@ namespace ADGP_125
 {
 	public interface IActionsInterface<T>
 	{
-		bool Attack();
+		bool Attack(T tTarget);
 		bool Defend();
-		//bool Magic(T Target, T Player);
+		bool Magic(T Target);
 		//bool Flee(IStatsInterface Running);
-		//bool GameOver(IStatsInterface Dead);
+		bool GameOver();
 		//bool Victory(IStatsInterface UnitCount);
 	}
 }

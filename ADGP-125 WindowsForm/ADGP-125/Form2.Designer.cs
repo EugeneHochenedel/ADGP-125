@@ -220,6 +220,7 @@
 			this.UserActionSelect.TabIndex = 34;
 			this.UserActionSelect.TabStop = false;
 			this.UserActionSelect.Text = "BattleMenu";
+			this.UserActionSelect.Leave += new System.EventHandler(this.BattleInfo_TextChanged);
 			// 
 			// TargetSelect
 			// 

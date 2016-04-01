@@ -7,11 +7,22 @@ using System.Threading.Tasks;
 namespace ADGP_125
 {
 	[Serializable()]
-	public class Unit : IStatsInterface//, IActionsInterface<Unit>
+	public class Unit : IStatsInterface, IActionsInterface<Unit>
 	{
 		private string Identifier;
 		private int iHP, iMP, iStr, iDef, iInt, iExp, iLvl;
 		bool Life;
+
+		public enum tempEnum
+		{
+			testEnum1,
+			testEnum2,
+			testEnum3,
+		}
+
+		FSM TempMachineAgain = new FSM(tempEnum.testEnum1);
+
+		//FSM testingMachine;
 
 		public Unit()
 		{
@@ -141,12 +152,10 @@ namespace ADGP_125
 				{
 					iRemaining = 0;
 					Selected.iHP = iRemaining;
-					return true;
 				}
 				else if (iRemaining > 0)
 				{
 					Selected.iHP = iRemaining;
-					return true;
 				}
 				return true;
 			}
@@ -154,21 +163,69 @@ namespace ADGP_125
 			{
 				return false;
 			}
-
 		}
-
 		public bool Defend()
 		{
+
 			int iIncrease = this.iDef * 2;
 			this.iDef = iIncrease;
 			Console.WriteLine("Def: " + this.iDef);
 			return true;
 		}
+		public bool Magic(Unit Two)
+		{
+			if (this.iMP > 5)
+			{
+				int iMagicTest1 = this.iInt * 2;
+				int iHPRemaining = Two.iHP - iMagicTest1;
+				if(iHPRemaining <= 0)
+				{
+					iHPRemaining = 0;
+					Two.iHP = iHPRemaining;
+					if(Two.iHP == 0)
+					{
+						Two.Alive = false;
+					}
+				}
+				else if(iHPRemaining > 0)
+				{
+					Two.iHP = iHPRemaining;
+					return true;
+				}
+				return true;
+			}
+			else if(this.iMP < 5)
+			{
+				return false;
+			}
+			return true;
+		}
 
-		//public bool Magic(Unit One, Unit Two)
-		//{
+		public bool Flee(Unit LifeSpan, FSM letsTestThis)
+		{
+			letsTestThis = new FSM(tempEnum.testEnum1);
+			if(LifeSpan.Life == true && letsTestThis._State.Equals(tempEnum.testEnum2))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+//			return true;
+		}
 
-		//	return true;
-		//}
+
+		public bool GameOver()
+		{
+			if (this.Life == false)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 }

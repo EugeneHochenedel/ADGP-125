@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace ADGP_125
 {
-	[Serializable()]
 	//finite state machine
 	//Helps to determine how it'll be used ahead of time
 	//Might only need to be made once, then just reused
-	class FSM
+	public class FSM
 	{
-		[Serializable()]
 		public class Transition
 		{
 			public Enum Present;
@@ -116,9 +114,9 @@ namespace ADGP_125
 						_currentState = change;
 						Console.WriteLine("Current State: " + _currentState + "\n");
 					}
-					else if (t.Present.Equals(_currentState))
+					else if (t.Present.Equals(change))
 					{
-						Console.WriteLine("That transition is invalid! \nCurrent State: " + _currentState + "\n");
+						Console.WriteLine("That transition isn't quite valid! \nCurrent State: "+ _currentState + "\n");
 					}
 				}
 			}
