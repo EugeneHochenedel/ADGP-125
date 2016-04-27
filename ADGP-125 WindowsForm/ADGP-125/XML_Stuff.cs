@@ -18,7 +18,7 @@ namespace ADGP_125
 
 		public void Seralization(string Files, T Info)
 		{
-			using (FileStream fStream = File.Create(@"..\..\Saves\" + Files + ".xml"))
+			using (FileStream fStream = File.Create(Program.SaveDataDirectory + Files + ".xml"))
 			{
 				XmlSerializer _serialize = new XmlSerializer(typeof(T));
 				_serialize.Serialize(fStream, Info);
@@ -30,7 +30,7 @@ namespace ADGP_125
 		{
 			
 			T tCharacter;
-			using (FileStream fStream = File.OpenRead(@"..\..\Saves\" + Files + ".xml"))
+			using (FileStream fStream = File.OpenRead(Program.SaveDataDirectory + Files + ".xml"))
 			{
 				XmlSerializer _deserialization = new XmlSerializer(typeof(T));
 				tCharacter = (T)_deserialization.Deserialize(fStream);
