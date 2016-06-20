@@ -20,10 +20,6 @@ namespace ADGP_125
 			testEnum3,
 		}
 
-		FSM TempMachineAgain = new FSM(tempEnum.testEnum1);
-
-		//FSM testingMachine;
-
 		public Unit()
 		{
 

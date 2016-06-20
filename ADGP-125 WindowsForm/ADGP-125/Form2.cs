@@ -20,6 +20,7 @@ namespace ADGP_125
 		public enum BattleStates
 		{
 			INIT,
+			CHARACTERCREATION,
 			ACTIONSELECT,
 			ENEMYSELECT,
 			BATTLEPHASE,
@@ -28,25 +29,22 @@ namespace ADGP_125
 		}
 
 		FSM StateMachine = new FSM(BattleStates.INIT);
-		//public Unit Temp = new Unit();
-		//public List<Unit> CharacterThings = new List<Unit>();
-		//public string PlayerName;
-		//public string Enemy1;
-		//public string Enemy2;
-		//public string Enemy3;
 
 		public Form2()
 		{
 			InitializeComponent();
 
 			StateMachine.AddState(BattleStates.INIT);
+			StateMachine.AddState(BattleStates.CHARACTERCREATION);
 			StateMachine.AddState(BattleStates.ACTIONSELECT);
 			StateMachine.AddState(BattleStates.ENEMYSELECT);
 			StateMachine.AddState(BattleStates.BATTLEPHASE);
 			StateMachine.AddState(BattleStates.ENDBATTLE);
 
-			StateMachine.AddTransition(BattleStates.INIT, BattleStates.ACTIONSELECT);
+			StateMachine.AddTransition(BattleStates.INIT, BattleStates.CHARACTERCREATION);
+			StateMachine.AddTransition(BattleStates.CHARACTERCREATION, BattleStates.ACTIONSELECT);
 			StateMachine.AddTransition(BattleStates.ACTIONSELECT, BattleStates.ENEMYSELECT);
+			StateMachine.AddTransition(BattleStates.ACTIONSELECT, BattleStates.CHARACTERCREATION);
 			StateMachine.AddTransition(BattleStates.ENEMYSELECT, BattleStates.BATTLEPHASE);
 			StateMachine.AddTransition(BattleStates.BATTLEPHASE, BattleStates.ENDBATTLE);
 			StateMachine.AddTransition(BattleStates.BATTLEPHASE, BattleStates.ACTIONSELECT);
@@ -59,36 +57,12 @@ namespace ADGP_125
 			buttonDefend.Click += (_Button, _Click) => { StateText_TextChanged(buttonDefend, (MouseEventArgs)_Click); };
 			buttonFlee.Click += (_Button, _Click) => { StateText_TextChanged(buttonFlee, (MouseEventArgs)_Click); };
 			buttonBack.Click += (_Button, _Click) => { StateText_TextChanged(buttonBack, (MouseEventArgs)_Click); };
-
-			//buttonAttack.Click += (_Select, _Click) => { BattleInfo_TextChanged(buttonAttack, (MouseEventArgs)_Click); };
-			//Enemy1.Click += (_Select, _Click) => { BattleInfo_TextChanged(Enemy1, (MouseEventArgs)_Click); };
+			Return.Click += (_Button, _Click) => { StateText_TextChanged(Return, (MouseEventArgs)_Click); };
+			UserButton.Click += (_Button, _Click) => { StateText_TextChanged(UserButton, (MouseEventArgs)_Click); };
 		}
 
-		public Unit Temp = new Unit("A Name", 50, 23, 15, 5, 11, 50, 1, true);
+		Unit PlayerStatistics;
 
-		private void BattleInfo_TextChanged(object sender, EventArgs e)
-		{
-			if (e.GetType() == typeof(MouseEventArgs))
-			{
-				//List<Button> Names1 = new List<Button>();
-				//Button Test2 = (Button)sender;
-				//Names1.Add(Test2);
-				
-				//foreach(Button c in Names1)
-				//{
-				//	if (UserActionSelect.Visible == true && TargetSelect.Visible == false)
-				//	{
-				//		BattleInfo.Text = "Select an enemy to " + c.Text;
-				//	}
-				//	else if(UserActionSelect.Visible == false && TargetSelect.Visible == true)
-				//	{
-				//		BattleInfo.Text = "You attack enemy: " + c.Text;
-				//	}
-					
-				//}
-				
-			}
-		}
 		private void AttackSelect(object sender, EventArgs e)
 		{
 			if (e.GetType() == typeof(MouseEventArgs))
@@ -101,35 +75,40 @@ namespace ADGP_125
 				}
 			}
 		}
+
 		private void SaveStates(object sender, EventArgs e)
 		{
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
-				_SaveLoad.Seralization("UserInfo", Temp);
+				PlayerStatistics = new Unit();
+				_SaveLoad.Seralization("UserInfo", PlayerStatistics);
 			}
 		}
 		private void buttonLoad_Click(object sender, EventArgs e)
 		{
+			StateMachine.ChangeState(BattleStates.ACTIONSELECT);
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
-				Temp = _SaveLoad.Deserialization("UserInfo");
-				_Test1.Add("Name: " + Temp.CharacterName);
-				_Test1.Add("HP: " + Temp.iHealth);
-				_Test1.Add("MP: " + Temp.iMana);
-				_Test1.Add("Strength: " + Temp.iStrength);
-				_Test1.Add("Defense: " + Temp.iDefense);
-				_Test1.Add("Intelligence: " + Temp.iIntelligence);
-				_Test1.Add("Experience: " + Temp.iExperience);
-				_Test1.Add("Level: " + Temp.iLevel);
+				PlayerStatistics = _SaveLoad.Deserialization("UserInfo");
+				_Test1.Add("Name: " + PlayerStatistics.CharacterName);
+				_Test1.Add("HP: " + PlayerStatistics.iHealth);
+				_Test1.Add("MP: " + PlayerStatistics.iMana);
+				_Test1.Add("Strength: " + PlayerStatistics.iStrength);
+				_Test1.Add("Defense: " + PlayerStatistics.iDefense);
+				_Test1.Add("Intelligence: " + PlayerStatistics.iIntelligence);
+				_Test1.Add("Experience: " + PlayerStatistics.iExperience);
+				_Test1.Add("Level: " + PlayerStatistics.iLevel);
 				PlayerStats.DataSource = _Test1;
 			}
+			GameStart.Hide();
+			InGame.Show();
+			TargetSelect.Hide();
 		}
 		private void Block(object sender, EventArgs e)
 		{
 			if (e.GetType() == typeof(MouseEventArgs))
 			{
-				Temp.Defend();
-				//StateMachine.ChangeState(BattleStates.BATTLEPHASE);
+				PlayerStatistics.Defend();
 			}
 		}
 		private void MagicSelect(object sender, EventArgs e)
@@ -170,8 +149,8 @@ namespace ADGP_125
 
 		private void Form2_Load(object sender, EventArgs e)
 		{
-			StateMachine.ChangeState(BattleStates.ACTIONSELECT);
-			TargetSelect.Hide();
+			StateMachine.ChangeState(BattleStates.CHARACTERCREATION);
+			InGame.Hide();
 		}
 
 		private void StateText_TextChanged(object sender, EventArgs e)
@@ -188,6 +167,36 @@ namespace ADGP_125
 					StateText.Text += StateMachine._State;
 				}
 			}
+		}
+
+		private void UserButton_Click(object sender, EventArgs e)
+		{
+			StateMachine.ChangeState(BattleStates.ACTIONSELECT);
+			if (e.GetType() == typeof(MouseEventArgs))
+			{
+				PlayerStatistics = new Unit();
+				PlayerStatistics.CharacterName = NameBox.Text;
+				PlayerStatistics.iHealth = (int)HealthPick.Value;
+				PlayerStatistics.iMana = (int)ManaPick.Value;
+				PlayerStatistics.iStrength = (int)StrengthPick.Value;
+				PlayerStatistics.iDefense = (int)DefensePick.Value;
+				PlayerStatistics.iIntelligence = (int)IntelligencePick.Value;
+				PlayerStatistics.iExperience = (int)ExperiencePick.Value;
+				PlayerStatistics.iLevel = (int)LevelPick.Value;
+				PlayerStatistics.Alive = true;
+				_SaveLoad.Seralization("UserInfo", PlayerStatistics);
+				
+			}
+			InGame.Show();
+			GameStart.Hide();
+			TargetSelect.Hide();
+		}
+
+		private void Return_Click(object sender, EventArgs e)
+		{
+			StateMachine.ChangeState(BattleStates.CHARACTERCREATION);
+			InGame.Hide();
+			GameStart.Show();
 		}
 	}
 }

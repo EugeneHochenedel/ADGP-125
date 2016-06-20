@@ -18,7 +18,7 @@ namespace ADGP_125
 {
 	static class Program
 	{
-		public static string SaveDataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/TempFolder/GameFiles/ADGP125PersonalFolder";
+		public static string SaveDataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/TempFolder/GameFiles/ADGP125PersonalFolder/";
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
